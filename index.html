@@ -540,22 +540,7 @@
         </div>
     </footer>
 
-    <script>
-        function showTab(tabId) {
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(sec => sec.style.display = 'none');
-
-            const links = document.querySelectorAll('.nav-links a');
-            links.forEach(link => link.classList.remove('active'));
-
-            document.getElementById(tabId).style.display = 'block';
-            
-            const activeLink = document.getElementById('tab-' + tabId);
-            if(activeLink) activeLink.classList.add('active');
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
+ 
 
         <script>
         // 1. دالة تغيير التبويبات (Tabs)
