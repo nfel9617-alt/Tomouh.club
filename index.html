@@ -41,10 +41,10 @@
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 5%; background: rgba(10, 11, 16, 0.95); backdrop-filter: blur(12px);
-            position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky; top: 0; z-index: 999; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .logo-container { display: flex; align-items: center; gap: 12px; }
+        .logo-container { display: flex; align-items: center; gap: 12px; z-index: 1000; }
         .logo-box {
             width: 45px; height: 45px; background: var(--tomouh-blue); border: 2px solid var(--tomouh-orange);
             border-radius: 10px; display: flex; align-items: center; justify-content: center;
@@ -63,8 +63,20 @@
             color: #fff; background: rgba(242, 104, 34, 0.1); border-bottom: 2px solid var(--tomouh-orange);
         }
 
+        /* Mobile Menu Button (Hidden on Desktop) */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 2.2rem;
+            color: var(--tomouh-orange);
+            cursor: pointer;
+            z-index: 1000;
+            padding: 5px 10px;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         /* Section Container */
-        .main-content { flex: 1; }
+        .main-content { flex: 1; position: relative; z-index: 1; }
         .content-section { display: none; padding-bottom: 100px; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -80,7 +92,6 @@
         .event-section { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 100px; position: relative; width: 100%; }
         .event-node { position: absolute; left: 50%; top: 30px; width: 20px; height: 20px; background: var(--tomouh-orange); border: 4px solid var(--bg-dark); border-radius: 50%; transform: translateX(-50%); z-index: 2; box-shadow: 0 0 15px var(--tomouh-orange); }
 
-        /* Adjusted for LTR */
         .event-info { width: 45%; text-align: left; padding-right: 20px; }
         .event-section:nth-child(even) .event-info { text-align: right; padding-right: 0; padding-left: 20px; order: 2; }
         .event-section:nth-child(even) .event-gallery { order: 1; padding-right: 20px; padding-left: 0; }
@@ -215,6 +226,77 @@
         .contact-info div:hover { color: #fff; }
         .contact-info i { color: var(--tomouh-orange); font-size: 1.2rem; }
         .copyright { margin-top: 40px; color: #555; font-size: 0.9rem; }
+
+        /* ==================== إعدادات شاشات الهاتف (Responsive Design) ==================== */
+        @media (max-width: 900px) {
+            .mobile-menu-btn { display: block; }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 11, 16, 0.98);
+                backdrop-filter: blur(15px);
+                padding: 10px 0;
+                border-bottom: 2px solid var(--tomouh-orange);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+                z-index: 1001;
+            }
+            
+            /* أولوية قصوى لإظهار القائمة */
+            #navLinks.active-menu { display: flex !important; }
+            
+            .nav-links a { text-align: center; padding: 15px; font-size: 1.2rem; display: block; border-radius: 0;}
+            .nav-links a:hover, .nav-links a.active { border-bottom: none; background: rgba(242, 104, 34, 0.15); border-left: 4px solid var(--tomouh-orange); }
+
+            /* العناوين الرئيسية */
+            .section-title h2 { font-size: 2.2rem; }
+            .event-title { font-size: 1.8rem; }
+            
+            /* قسم المنظمات (التايم لاين) */
+            .timeline::before { left: 20px; transform: translateX(0); }
+            .event-section { flex-direction: column !important; align-items: flex-start; margin-bottom: 60px; padding-left: 50px; }
+            .event-node { left: 20px; top: 0; transform: translateX(-50%); }
+            
+            .event-info, .event-gallery, 
+            .event-section:nth-child(even) .event-info, 
+            .event-section:nth-child(even) .event-gallery { 
+                width: 100%; padding: 0; text-align: left; 
+            }
+            
+            .event-section:nth-child(even) .event-info { order: 1; }
+            .event-section:nth-child(even) .event-gallery { order: 2; margin-top: 20px; }
+            .event-gallery { margin-top: 20px; }
+            
+            .event-section:nth-child(even) .event-location { border-right: none; border-left: 3px solid var(--tomouh-orange); }
+            .event-section:nth-child(even) .tech-points li { justify-content: flex-start; text-align: left;}
+
+            /* شبكة الصور */
+            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .img-placeholder { height: 200px; }
+            .ep-card { flex-direction: column; text-align: center; }
+            .ep-img { width: 100%; height: 150px; }
+
+            /* قسم الرعاة والشركاء */
+            .sponsor-cta { padding: 30px 15px; }
+            .sponsor-cta h3 { font-size: 1.5rem; }
+
+            /* قسم الفريق */
+            .team-category-title { font-size: 1.4rem; padding: 10px 15px; width: 90%; white-space: nowrap;}
+            .team-grid { grid-template-columns: 1fr; }
+            .team-card { max-width: 100%; }
+
+            /* قسم التواصل */
+            .contact-wrapper { padding: 20px; }
+            .contact-form-container { padding: 20px; }
+
+            /* الفوتر */
+            .footer-slogan { font-size: 1.1rem; }
+            .contact-info { flex-direction: column; gap: 15px; align-items: center; }
+        }
     </style>
 </head>
 <body>
@@ -224,7 +306,12 @@
             <div class="logo-box">T</div>
             <div class="logo-text">TOMOUH <span>CLUB</span></div>
         </div>
-        <ul class="nav-links">
+        
+        <div class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu(event)">
+            &#9776;
+        </div>
+        
+        <ul class="nav-links" id="navLinks">
             <li><a onclick="showTab('organizations')" id="tab-organizations" class="active">Events & Production</a></li>
             <li><a onclick="showTab('partners')" id="tab-partners">Partners</a></li>
             <li><a onclick="showTab('team')" id="tab-team">Team Structure</a></li>
@@ -254,7 +341,16 @@
                     <div class="event-gallery podcast-stack">
                         <div class="ep-card"><div class="ep-img" style="background-image: url('images/pod-french.png');">IMG 1</div><div class="ep-content"><span class="ep-tag">French Language</span><h3 class="ep-title">Unit 1: The Historical Text</h3><p class="ep-presenter">Host: K. Bouchra</p></div></div>
                         <div class="ep-card"><div class="ep-img" style="background-image: url('images/pod-english.png');">IMG 2</div><div class="ep-content"><span class="ep-tag">English Language</span><h3 class="ep-title">Ethics in Business Unit</h3><p class="ep-presenter">Host: N. Ahmed</p></div></div>
-                        <div class="ep-card"><div class="ep-img" style="background-image: url('images/pod-guest.png');">IMG 3</div><div class="ep-content"><span class="ep-tag" style="background: #475569;">Coming Soon</span><h3 class="ep-title">Architect of Reality and Websites</h3><p class="ep-presenter">Guest: Prof Souh</p></div></div>
+                        
+                        <div class="ep-card">
+                            <div class="ep-img" style="background-image: url('images/pod-guest.png');">IMG 3</div>
+                            <div class="ep-content">
+                                <span class="ep-tag">Guest Series</span>
+                                <h3 class="ep-title">Civil Engineering Specialty</h3>
+                                <p class="ep-presenter">Guest: Civil Eng. Teacher</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -541,89 +637,92 @@
     </footer>
 
     <script>
+        // --- برمجة عامة ومباشرة لزر القائمة تعمل على جميع الهواتف بامتياز ---
+        function toggleMobileMenu(event) {
+            // منع انتقال الضغطة للعناصر الأخرى
+            event.stopPropagation();
+            
+            const navLinks = document.getElementById('navLinks');
+            // التبديل الصريح للـ class
+            navLinks.classList.toggle('active-menu');
+        }
+
+        // إغلاق القائمة عند الضغط في أي مكان خارجها في الهاتف
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('navLinks');
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            
+            // إذا كانت القائمة مفتوحة والضغطة لم تكن على الزر أو القائمة نفسها
+            if (navLinks.classList.contains('active-menu') && 
+                !navLinks.contains(event.target) && 
+                !mobileBtn.contains(event.target)) {
+                navLinks.classList.remove('active-menu');
+            }
+        });
+
         // دالة التنقل بين الأقسام
         function showTab(tabId) {
-            // إخفاء جميع الأقسام
             const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.style.display = 'none';
-            });
+            sections.forEach(section => { section.style.display = 'none'; });
 
-            // إزالة الـ active class من جميع الروابط
             const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
+            navLinks.forEach(link => { link.classList.remove('active'); });
 
-            // إظهار القسم المطلوب
             const targetSection = document.getElementById(tabId);
-            if (targetSection) {
-                targetSection.style.display = 'block';
+            if (targetSection) { targetSection.style.display = 'block'; }
+
+            const activeTab = document.getElementById('tab-' + tabId);
+            if (activeTab) { activeTab.classList.add('active'); }
+            
+            // إغلاق القائمة المنسدلة في الهاتف تلقائياً بعد الاختيار
+            const navLinksContainer = document.getElementById('navLinks');
+            if(navLinksContainer.classList.contains('active-menu')) {
+                navLinksContainer.classList.remove('active-menu');
             }
 
-            // إضافة الـ active class للرابط المختار
-            const activeTab = document.getElementById('tab-' + tabId);
-            if (activeTab) {
-                activeTab.classList.add('active');
-            }
-            
-            // العودة إلى أعلى الصفحة عند تغيير القسم
             window.scrollTo(0, 0);
         }
 
+        // كود تحميل الصور
         document.addEventListener("DOMContentLoaded", function() {
-
-            // 1. تحديد جميع العناصر التي تستخدم صور كخلفية في تصميمك
             const imageElements = document.querySelectorAll('.team-img, .ep-img, .img-placeholder, .sponsor-logo, .about-img');
-            
-            // 2. قائمة بالصيغ التي سيقوم الكود بتجربتها تلقائياً
             const extensions = ['.jpg', '.png', '.jpeg', '.webp', '.svg'];
 
             imageElements.forEach(el => {
-                // استخراج مسار الصورة المكتوب في الكود
                 const bgImage = el.style.backgroundImage;
                 if (!bgImage || bgImage === 'none') return;
 
-                // استخراج الرابط الصافي من صيغة url('...')
                 const urlMatch = bgImage.match(/url\(["']?(.*?)["']?\)/);
                 if (!urlMatch) return;
                 
                 let originalUrl = urlMatch[1];
-                
-                // قطع الصيغة المكتوبة والاحتفاظ بمسار واسم الصورة فقط
                 let basePath = originalUrl.substring(0, originalUrl.lastIndexOf('.'));
                 if(!basePath) basePath = originalUrl;
 
                 let extIndex = 0;
 
-                // 3. دالة التجربة التلقائية
                 function testNextExtension() {
-                    if (extIndex >= extensions.length) return; // إذا جرب كل الصيغ وفشلت يتوقف
+                    if (extIndex >= extensions.length) return; 
                     
                     let testUrl = basePath + extensions[extIndex];
                     let img = new Image();
                     
                     img.onload = function() {
-                        // إذا نجح تحميل الصورة نطبقها على العنصر
                         el.style.backgroundImage = `url('${testUrl}')`;
-                        el.innerHTML = ''; // مسح الكلمات المؤقتة لتصبح الصورة نظيفة
+                        el.innerHTML = ''; 
                     };
                     
                     img.onerror = function() {
-                        // إذا فشلت، نجرب الصيغة التي تليها
                         extIndex++;
                         testNextExtension();
                     };
                     
                     img.src = testUrl;
                 }
-
-                // تشغيل الفحص لكل صورة
                 testNextExtension();
             });
         });
     </script>
 </body>
 </html>
-      
            
