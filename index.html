@@ -539,121 +539,90 @@
             <div class="copyright">© 2026 Tomouh Club. All rights reserved.</div>
         </div>
     </footer>
-<script>
 
-    document.addEventListener("DOMContentLoaded", function() {
+    <script>
+        // دالة التنقل بين الأقسام
+        function showTab(tabId) {
+            // إخفاء جميع الأقسام
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
 
-        // 1. تحديد جميع العناصر التي تستخدم صور كخلفية في تصميمك
+            // إزالة الـ active class من جميع الروابط
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
 
-        const imageElements = document.querySelectorAll('.team-img, .ep-img, .img-placeholder, .sponsor-logo, .about-img');
-
-        
-
-        // 2. قائمة بالصيغ التي سيقوم الكود بتجربتها تلقائياً
-
-        const extensions = ['.jpg', '.png', '.jpeg', '.webp', '.svg'];
-
-
-
-        imageElements.forEach(el => {
-
-            // استخراج مسار الصورة المكتوب في الكود
-
-            const bgImage = el.style.backgroundImage;
-
-            if (!bgImage || bgImage === 'none') return;
-
-
-
-            // استخراج الرابط الصافي من صيغة url('...')
-
-            const urlMatch = bgImage.match(/url\(["']?(.*?)["']?\)/);
-
-            if (!urlMatch) return;
-
-            
-
-            let originalUrl = urlMatch[1];
-
-            
-
-            // قطع الصيغة المكتوبة والاحتفاظ بمسار واسم الصورة فقط (مثال: images/noufel)
-
-            let basePath = originalUrl.substring(0, originalUrl.lastIndexOf('.'));
-
-            if(!basePath) basePath = originalUrl; // في حال لم يكن هناك نقطة
-
-
-
-            let extIndex = 0;
-
-
-
-            // 3. دالة التجربة التلقائية
-
-            function testNextExtension() {
-
-                if (extIndex >= extensions.length) return; // إذا جرب كل الصيغ وفشلت يتوقف
-
-                
-
-                let testUrl = basePath + extensions[extIndex];
-
-                let img = new Image(); // إنشاء صورة وهمية لاختبار المسار
-
-                
-
-                img.onload = function() {
-
-                    // إذا نجح تحميل الصورة (الصيغة صحيحة!) نطبقها على العنصر
-
-                    el.style.backgroundImage = `url('${testUrl}')`;
-
-                    el.innerHTML = ''; // مسح كلمة "IMG" أو "QR Code" المؤقتة لتصبح الصورة نظيفة
-
-                };
-
-                
-
-                img.onerror = function() {
-
-                    // إذا فشلت هذه الصيغة، نجرب الصيغة التي تليها في القائمة
-
-                    extIndex++;
-
-                    testNextExtension();
-
-                };
-
-                
-
-                img.src = testUrl; // بدء الاختبار
-
+            // إظهار القسم المطلوب
+            const targetSection = document.getElementById(tabId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
             }
 
+            // إضافة الـ active class للرابط المختار
+            const activeTab = document.getElementById('tab-' + tabId);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            // العودة إلى أعلى الصفحة عند تغيير القسم
+            window.scrollTo(0, 0);
+        }
 
+        document.addEventListener("DOMContentLoaded", function() {
 
-            // تشغيل الفحص لكل صورة
+            // 1. تحديد جميع العناصر التي تستخدم صور كخلفية في تصميمك
+            const imageElements = document.querySelectorAll('.team-img, .ep-img, .img-placeholder, .sponsor-logo, .about-img');
+            
+            // 2. قائمة بالصيغ التي سيقوم الكود بتجربتها تلقائياً
+            const extensions = ['.jpg', '.png', '.jpeg', '.webp', '.svg'];
 
-            testNextExtension();
+            imageElements.forEach(el => {
+                // استخراج مسار الصورة المكتوب في الكود
+                const bgImage = el.style.backgroundImage;
+                if (!bgImage || bgImage === 'none') return;
 
+                // استخراج الرابط الصافي من صيغة url('...')
+                const urlMatch = bgImage.match(/url\(["']?(.*?)["']?\)/);
+                if (!urlMatch) return;
+                
+                let originalUrl = urlMatch[1];
+                
+                // قطع الصيغة المكتوبة والاحتفاظ بمسار واسم الصورة فقط
+                let basePath = originalUrl.substring(0, originalUrl.lastIndexOf('.'));
+                if(!basePath) basePath = originalUrl;
+
+                let extIndex = 0;
+
+                // 3. دالة التجربة التلقائية
+                function testNextExtension() {
+                    if (extIndex >= extensions.length) return; // إذا جرب كل الصيغ وفشلت يتوقف
+                    
+                    let testUrl = basePath + extensions[extIndex];
+                    let img = new Image();
+                    
+                    img.onload = function() {
+                        // إذا نجح تحميل الصورة نطبقها على العنصر
+                        el.style.backgroundImage = `url('${testUrl}')`;
+                        el.innerHTML = ''; // مسح الكلمات المؤقتة لتصبح الصورة نظيفة
+                    };
+                    
+                    img.onerror = function() {
+                        // إذا فشلت، نجرب الصيغة التي تليها
+                        extIndex++;
+                        testNextExtension();
+                    };
+                    
+                    img.src = testUrl;
+                }
+
+                // تشغيل الفحص لكل صورة
+                testNextExtension();
+            });
         });
-
-    });
-
-</script>
-
-
-
-
-
-        
-
     </script>
- 
-
-     
-    
 </body>
 </html>
       
