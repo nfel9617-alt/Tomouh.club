@@ -44,15 +44,8 @@
             position: sticky; top: 0; z-index: 999; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .logo-container { display: flex; align-items: center; gap: 12px; z-index: 1000; }
-        .logo-box {
-            width: 45px; height: 45px; background: var(--tomouh-blue); border: 2px solid var(--tomouh-orange);
-            border-radius: 10px; display: flex; align-items: center; justify-content: center;
-            font-weight: 900; color: var(--tomouh-orange); font-size: 1.2rem;
-            box-shadow: 0 0 10px rgba(242, 104, 34, 0.2);
-        }
-        .logo-text { font-size: 1.6rem; font-weight: 900; color: #fff; letter-spacing: 1px; }
-        .logo-text span { color: var(--tomouh-orange); }
+        .logo-container { display: flex; align-items: center; z-index: 1000; }
+        .brand-logo { height: 50px; width: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(242, 104, 34, 0.3)); }
 
         .nav-links { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; }
         .nav-links a {
@@ -63,16 +56,10 @@
             color: #fff; background: rgba(242, 104, 34, 0.1); border-bottom: 2px solid var(--tomouh-orange);
         }
 
-        /* Mobile Menu Button (Hidden on Desktop) */
+        /* Mobile Menu Button */
         .mobile-menu-btn {
-            display: none;
-            font-size: 2.2rem;
-            color: var(--tomouh-orange);
-            cursor: pointer;
-            z-index: 1000;
-            padding: 5px 10px;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
+            display: none; font-size: 2.2rem; color: var(--tomouh-orange); cursor: pointer;
+            z-index: 1000; padding: 5px 10px; user-select: none; -webkit-tap-highlight-color: transparent;
         }
 
         /* Section Container */
@@ -210,12 +197,18 @@
         .submit-btn { width: 100%; background: var(--glow-gold); color: #fff; border: none; padding: 16px; font-size: 1.2rem; font-weight: bold; border-radius: 10px; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', sans-serif; box-shadow: 0 5px 15px rgba(242,104,34,0.3); }
         .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(242,104,34,0.6); }
 
+        /* حالة الإرسال */
+        #formStatus { display: none; margin-top: 15px; text-align: center; font-weight: bold; padding: 10px; border-radius: 8px; }
+        .status-success { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); }
+        .status-error { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+
         /* ==================== Footer ==================== */
         footer { background: #050608; border-top: 1px solid rgba(255,255,255,0.05); padding: 50px 20px 30px; text-align: center; margin-top: auto; position: relative; overflow: hidden; }
         footer::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(28, 24, 98, 0.3) 0%, transparent 60%); animation: rotateBg 20s linear infinite; pointer-events: none; z-index: 0; }
         @keyframes rotateBg { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .footer-content-wrapper { position: relative; z-index: 1; } 
-        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; margin-bottom: 15px; }
+        .footer-logo img { height: 60px; filter: drop-shadow(0 0 10px rgba(242, 104, 34, 0.3)); }
         .footer-slogan { font-size: 1.4rem; font-weight: 700; color: #fff; margin: 0 0 30px 0; font-style: italic;}
         .footer-slogan span { color: var(--tomouh-orange); }
         .social-icons { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; }
@@ -230,70 +223,32 @@
         /* ==================== إعدادات شاشات الهاتف (Responsive Design) ==================== */
         @media (max-width: 900px) {
             .mobile-menu-btn { display: block; }
-            
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(10, 11, 16, 0.98);
-                backdrop-filter: blur(15px);
-                padding: 10px 0;
-                border-bottom: 2px solid var(--tomouh-orange);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-                z-index: 1001;
-            }
-            
-            /* أولوية قصوى لإظهار القائمة */
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(10, 11, 16, 0.98); backdrop-filter: blur(15px); padding: 10px 0; border-bottom: 2px solid var(--tomouh-orange); box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1001; }
             #navLinks.active-menu { display: flex !important; }
-            
             .nav-links a { text-align: center; padding: 15px; font-size: 1.2rem; display: block; border-radius: 0;}
             .nav-links a:hover, .nav-links a.active { border-bottom: none; background: rgba(242, 104, 34, 0.15); border-left: 4px solid var(--tomouh-orange); }
-
-            /* العناوين الرئيسية */
             .section-title h2 { font-size: 2.2rem; }
             .event-title { font-size: 1.8rem; }
-            
-            /* قسم المنظمات (التايم لاين) */
             .timeline::before { left: 20px; transform: translateX(0); }
             .event-section { flex-direction: column !important; align-items: flex-start; margin-bottom: 60px; padding-left: 50px; }
             .event-node { left: 20px; top: 0; transform: translateX(-50%); }
-            
-            .event-info, .event-gallery, 
-            .event-section:nth-child(even) .event-info, 
-            .event-section:nth-child(even) .event-gallery { 
-                width: 100%; padding: 0; text-align: left; 
-            }
-            
+            .event-info, .event-gallery, .event-section:nth-child(even) .event-info, .event-section:nth-child(even) .event-gallery { width: 100%; padding: 0; text-align: left; }
             .event-section:nth-child(even) .event-info { order: 1; }
             .event-section:nth-child(even) .event-gallery { order: 2; margin-top: 20px; }
             .event-gallery { margin-top: 20px; }
-            
             .event-section:nth-child(even) .event-location { border-right: none; border-left: 3px solid var(--tomouh-orange); }
             .event-section:nth-child(even) .tech-points li { justify-content: flex-start; text-align: left;}
-
-            /* شبكة الصور */
             .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
             .img-placeholder { height: 200px; }
             .ep-card { flex-direction: column; text-align: center; }
             .ep-img { width: 100%; height: 150px; }
-
-            /* قسم الرعاة والشركاء */
             .sponsor-cta { padding: 30px 15px; }
             .sponsor-cta h3 { font-size: 1.5rem; }
-
-            /* قسم الفريق */
             .team-category-title { font-size: 1.4rem; padding: 10px 15px; width: 90%; white-space: nowrap;}
             .team-grid { grid-template-columns: 1fr; }
             .team-card { max-width: 100%; }
-
-            /* قسم التواصل */
             .contact-wrapper { padding: 20px; }
             .contact-form-container { padding: 20px; }
-
-            /* الفوتر */
             .footer-slogan { font-size: 1.1rem; }
             .contact-info { flex-direction: column; gap: 15px; align-items: center; }
         }
@@ -303,8 +258,7 @@
 
     <nav>
         <div class="logo-container">
-            <div class="logo-box">T</div>
-            <div class="logo-text">TOMOUH <span>CLUB</span></div>
+            <img src="images/logo.png" alt="Tomouh Club Logo" class="brand-logo">
         </div>
         
         <div class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu(event)">
@@ -341,7 +295,6 @@
                     <div class="event-gallery podcast-stack">
                         <div class="ep-card"><div class="ep-img" style="background-image: url('images/pod-french.png');">IMG 1</div><div class="ep-content"><span class="ep-tag">French Language</span><h3 class="ep-title">Unit 1: The Historical Text</h3><p class="ep-presenter">Host: K. Bouchra</p></div></div>
                         <div class="ep-card"><div class="ep-img" style="background-image: url('images/pod-english.png');">IMG 2</div><div class="ep-content"><span class="ep-tag">English Language</span><h3 class="ep-title">Ethics in Business Unit</h3><p class="ep-presenter">Host: N. Ahmed</p></div></div>
-                        
                         <div class="ep-card">
                             <div class="ep-img" style="background-image: url('images/pod-guest.png');">IMG 3</div>
                             <div class="ep-content">
@@ -350,7 +303,6 @@
                                 <p class="ep-presenter">Guest: Civil Eng. Teacher</p>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -429,7 +381,7 @@
                     </div>
                     <div class="team-card gold-tier">
                         <div class="team-img-wrapper"><div class="team-img" style="background-image: url('images/bouchra.jpg');">IMG</div></div>
-                        <div class="team-info"><h3>K. Bochra</h3><p>Deputy Leader</p><span class="sub-role">Administrative Manager</span></div>
+                        <div class="team-info"><h3>K. Bouchra</h3><p>Deputy Leader</p><span class="sub-role">Administrative Manager</span></div>
                         <div class="team-social"><a href="#"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
                     </div>
                 </div>
@@ -492,7 +444,7 @@
                     </div>
                     <div class="team-card creative-tier">
                         <div class="team-img-wrapper"><div class="team-img" style="background-image: url('images/loujain.jpg');">IMG</div></div>
-                        <div class="team-info"><h3>B. Loujain</h3><p>Basic Monitoring & Eval. </p><span class="sub-role">Deputy Lead</span></div>
+                        <div class="team-info"><h3>B. Loujain</h3><p>French Podcast</p><span class="sub-role">Deputy Lead</span></div>
                         <div class="team-social"><a href="#"><i class="fas fa-microphone"></i></a></div>
                     </div>
                     <div class="team-card creative-tier">
@@ -542,7 +494,7 @@
                     <div class="about-img" style="background-image: url('images/act2.png');">IMG 2</div>
                     <div class="about-img" style="background-image: url('images/act3.png');">IMG 3</div>
                     <div class="about-img" style="background-image: url('images/act4.png');">IMG 4</div>
-                    <div class="about-img" style="background-image: url('images/act5.jpg');">IMG 5</div>
+                    <div class="about-img" style="background-image: url('images/act5.png');">IMG 5</div>
                 </div>
             </div>
         </section>
@@ -587,15 +539,19 @@
                 </div>
 
                 <div class="contact-form-container">
-                    <form action="mailto:tomouhpodcast@gmail.com" method="post" enctype="text/plain">
+                    <form id="contactForm" onsubmit="sendEmail(event)">
+                        
+                        <input type="hidden" name="access_key" value="2a4b8f4d-0e2f-4fc5-85de-e7d070f95b7d">
+                        <input type="hidden" name="subject" value="New Contact from Tomouh Website">
+                        
                         <div class="form-group">
-                            <input type="text" name="Full_Name" class="form-control" placeholder="Full Name" required>
+                            <input type="text" name="name" class="form-control" placeholder="Full Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" name="Phone_Number" class="form-control" placeholder="Phone Number" required>
+                            <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
                         </div>
                         <div class="form-group">
-                            <select name="Request_Type" class="form-control" required>
+                            <select name="request_type" class="form-control" required>
                                 <option value="" disabled selected>Select the type of your request...</option>
                                 <option value="Team Join Request">Team Join Request</option>
                                 <option value="Sponsorship and Funding">Sponsorship and Funding</option>
@@ -603,11 +559,13 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea name="Message" class="form-control" placeholder="Write your message details here..." required></textarea>
+                            <textarea name="message" class="form-control" placeholder="Write your message details here..." required></textarea>
                         </div>
-                        <button type="submit" class="submit-btn">
+                        <button type="submit" class="submit-btn" id="submitBtn">
                             Send Message Now <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
                         </button>
+                        
+                        <div id="formStatus"></div>
                     </form>
                 </div>
             </div>
@@ -618,8 +576,7 @@
     <footer>
         <div class="footer-content-wrapper">
             <div class="footer-logo">
-                <div class="logo-box">T</div>
-                <div class="logo-text">TOMOUH <span>CLUB</span></div>
+                <img src="images/logo.png" alt="Tomouh Club Logo">
             </div>
             <p class="footer-slogan">"Let us be the beginning.. and let our <span>ambition</span> be a success story"</p>
             <div class="social-icons">
@@ -637,22 +594,15 @@
     </footer>
 
     <script>
-        // --- برمجة عامة ومباشرة لزر القائمة تعمل على جميع الهواتف بامتياز ---
         function toggleMobileMenu(event) {
-            // منع انتقال الضغطة للعناصر الأخرى
             event.stopPropagation();
-            
             const navLinks = document.getElementById('navLinks');
-            // التبديل الصريح للـ class
             navLinks.classList.toggle('active-menu');
         }
 
-        // إغلاق القائمة عند الضغط في أي مكان خارجها في الهاتف
         document.addEventListener('click', function(event) {
             const navLinks = document.getElementById('navLinks');
             const mobileBtn = document.getElementById('mobileMenuBtn');
-            
-            // إذا كانت القائمة مفتوحة والضغطة لم تكن على الزر أو القائمة نفسها
             if (navLinks.classList.contains('active-menu') && 
                 !navLinks.contains(event.target) && 
                 !mobileBtn.contains(event.target)) {
@@ -660,7 +610,6 @@
             }
         });
 
-        // دالة التنقل بين الأقسام
         function showTab(tabId) {
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(section => { section.style.display = 'none'; });
@@ -674,7 +623,6 @@
             const activeTab = document.getElementById('tab-' + tabId);
             if (activeTab) { activeTab.classList.add('active'); }
             
-            // إغلاق القائمة المنسدلة في الهاتف تلقائياً بعد الاختيار
             const navLinksContainer = document.getElementById('navLinks');
             if(navLinksContainer.classList.contains('active-menu')) {
                 navLinksContainer.classList.remove('active-menu');
@@ -683,7 +631,67 @@
             window.scrollTo(0, 0);
         }
 
-        // كود تحميل الصور
+        // ==========================================
+        // دالة إرسال الإيميل مباشرة من المتصفح (Web3Forms)
+        // ==========================================
+        function sendEmail(e) {
+            e.preventDefault();
+            
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const statusDiv = document.getElementById('formStatus');
+            
+            // تغيير حالة الزر أثناء الإرسال
+            submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    statusDiv.innerHTML = "✅ Message sent successfully!";
+                    statusDiv.className = "status-success";
+                    statusDiv.style.display = "block";
+                    form.reset();
+                } else {
+                    console.log(response);
+                    statusDiv.innerHTML = "❌ Error sending message. Make sure the Access Key is correct.";
+                    statusDiv.className = "status-error";
+                    statusDiv.style.display = "block";
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                statusDiv.innerHTML = "❌ A network error occurred, please try again.";
+                statusDiv.className = "status-error";
+                statusDiv.style.display = "block";
+            })
+            .then(function() {
+                // إعادة الزر لشكله الطبيعي
+                submitBtn.innerHTML = 'Send Message Now <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>';
+                submitBtn.style.opacity = '1';
+                submitBtn.disabled = false;
+                
+                // إخفاء رسالة النجاح بعد 5 ثواني
+                setTimeout(() => {
+                    statusDiv.style.display = "none";
+                }, 5000);
+            });
+        }
+
+        // كود تحميل الصور الاحتياطي (إذا لم توجد اللاحقة الافتراضية)
         document.addEventListener("DOMContentLoaded", function() {
             const imageElements = document.querySelectorAll('.team-img, .ep-img, .img-placeholder, .sponsor-logo, .about-img');
             const extensions = ['.jpg', '.png', '.jpeg', '.webp', '.svg'];
@@ -725,4 +733,5 @@
     </script>
 </body>
 </html>
+           
            
